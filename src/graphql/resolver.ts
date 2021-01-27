@@ -8,6 +8,7 @@ export default {
         if (!user) { 
             throw new Error('No User Found');
         } else { 
+            console.log(user.username);
             return { 
                 username: user.username,
                 id: user.id, 
