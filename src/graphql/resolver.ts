@@ -1,6 +1,6 @@
-import User from '../models/user';
-import discord from 'discord.js'; 
+import User from '../models/user'; 
 import  refs  from '../utils/refs';
+import { guilds } from '../utils/discord'; 
 export default { 
     async getUser (args: any) { 
         let id = args.id; 
@@ -8,13 +8,13 @@ export default {
         if (!user) { 
             throw new Error('No User Found');
         } else { 
-            console.log(user.username);
+            let sortedGuilds = await guilds(user.guilds, user.id);
             return { 
                 username: user.username,
                 id: user.id, 
                 _id: user._id,
                 avatar: user.avatar, 
-                guilds: user.guilds, 
+                guilds: sortedGuilds, 
                 discriminator: user.discriminator, 
                 icon: user.icon ? user.icon : 'thor'
             }
@@ -23,7 +23,5 @@ export default {
     async check(args: any ) { 
         let userid = args.id; 
         let guildid = args.id; 
-        const client = new discord.Client(); 
-        client.login(refs.token);
     }
 }

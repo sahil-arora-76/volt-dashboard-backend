@@ -13,8 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = __importDefault(require("../models/user"));
-const discord_js_1 = __importDefault(require("discord.js"));
-const refs_1 = __importDefault(require("../utils/refs"));
+const discord_1 = require("../utils/discord");
 exports.default = {
     getUser(args) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -24,13 +23,13 @@ exports.default = {
                 throw new Error('No User Found');
             }
             else {
-                console.log(user.username);
+                let sortedGuilds = yield discord_1.guilds(user.guilds, user.id);
                 return {
                     username: user.username,
                     id: user.id,
                     _id: user._id,
                     avatar: user.avatar,
-                    guilds: user.guilds,
+                    guilds: sortedGuilds,
                     discriminator: user.discriminator,
                     icon: user.icon ? user.icon : 'thor'
                 };
@@ -41,8 +40,6 @@ exports.default = {
         return __awaiter(this, void 0, void 0, function* () {
             let userid = args.id;
             let guildid = args.id;
-            const client = new discord_js_1.default.Client();
-            client.login(refs_1.default.token);
         });
     }
 };
