@@ -8,22 +8,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * TODO ADD MONGOOSE CONNECTION FOR  SENDING DATA TO THE CLIENT
- */
+const user_1 = __importDefault(require("../models/user"));
+const discord_js_1 = __importDefault(require("discord.js"));
+const refs_1 = __importDefault(require("../utils/refs"));
 exports.default = {
     getUser(args) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(args);
-            return {
-                id: 'SOME ID',
-                username: 'SOME USERNAME',
-                discriminator: 'SOME DISC',
-                _id: 'SOME MONGOOSE OBJECT',
-                guilds: 'SOME GUILDS',
-                avatar: 'SOME AV'
-            };
+            let id = args.id;
+            let user = yield user_1.default.findOne({ id: id });
+            if (!user) {
+                throw new Error('No User Found');
+            }
+            else {
+                return {
+                    username: user.username,
+                    id: user.id,
+                    _id: user._id,
+                    avatar: user.avatar,
+                    guilds: user.guilds,
+                    discriminator: user.discriminator,
+                    icon: user.icon ? user.icon : 'thor'
+                };
+            }
         });
     },
+    check(args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let userid = args.id;
+            let guildid = args.id;
+            const client = new discord_js_1.default.Client();
+            client.login(refs_1.default.token);
+        });
+    }
 };
