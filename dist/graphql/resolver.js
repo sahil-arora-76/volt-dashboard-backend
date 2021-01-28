@@ -13,12 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = __importDefault(require("../models/user"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const discord_1 = require("../utils/discord");
 exports.default = {
     getUser(args) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = args.id;
-            let user = yield user_1.default.findOne({ id: id });
+            let user = yield user_1.default.findOne({ _id: id });
             if (!user) {
                 throw new Error('No User Found');
             }
@@ -36,10 +37,18 @@ exports.default = {
             }
         });
     },
-    check(args) {
+    sendEmbed(args) {
         return __awaiter(this, void 0, void 0, function* () {
-            let userid = args.id;
-            let guildid = args.id;
+            let channelId = args.userData.channelId;
+            let guildId = args.userData.guildId;
+            let description = args.userData.description;
+            let color = args.userData.color;
+            let c = mongoose_1.default.Types.ObjectId(args.userData.userId);
+            let user = yield user_1.default.findOne({ _id: c });
+            if (user) {
+                let embed = yield discord_1.sendEmbed({ channelId: channelId, guildId: guildId, color: color, description: description, userId: user.id });
+                return embed;
+            }
         });
     }
 };

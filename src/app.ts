@@ -34,13 +34,13 @@ app.use('/auth2/callback', async (req: Request, res: Response, next: NextFunctio
     }
     const guilds = await getGuilds(authToken.access_token);
     const users = await getUser(authToken.access_token);
-    const isUser: any = await User.findOne({id: users.id});
-    console.log(users);
+    const isUser: any = await User.findOne({id: users.id});;
     if (isUser) { 
         isUser.avatar! = users.avatar;
         isUser.username! = users.username; 
         isUser.discrimintor! = users.discriminator; 
-        isUser.save(); 
+        isUser.save();
+        res.cookie('userid', isUser._id.toString()); 
     } else { 
         const newUser = new User({
             id: users.id, 
@@ -49,12 +49,12 @@ app.use('/auth2/callback', async (req: Request, res: Response, next: NextFunctio
             guilds: guilds
         })
         newUser.save(); 
+        res.cookie('userid', users._id.toString());
     }
     res.cookie('token', { 
         access_token: authToken.access_token, 
         refresh_token: authToken.refresh_token
     }); 
-    res.cookie('userid', users.id);
     return res.redirect('http://localhost:8080/login');  
 })
 app.use('/graphql', graphqlHTTP({ 

@@ -1,10 +1,11 @@
 import User from '../models/user'; 
 import  refs  from '../utils/refs';
-import { guilds } from '../utils/discord'; 
+import mongoose from 'mongoose';
+import { guilds, sendEmbed as embeds  } from '../utils/discord'; 
 export default { 
     async getUser (args: any) { 
         let id = args.id; 
-        let user: any = await User.findOne({ id: id });
+        let user: any = await User.findOne({ _id: id });
         if (!user) { 
             throw new Error('No User Found');
         } else { 
@@ -20,8 +21,16 @@ export default {
             }
         } 
     }, 
-    async check(args: any ) { 
-        let userid = args.id; 
-        let guildid = args.id; 
+    async sendEmbed(args: any ) { 
+        let channelId = args.userData.channelId; 
+        let guildId = args.userData.guildId;
+        let description = args.userData.description; 
+        let color = args.userData.color;
+        let c  = mongoose.Types.ObjectId(args.userData.userId);
+        let user = await User.findOne({ _id:  c }); 
+        if (user) { 
+            let embed = await embeds({channelId: channelId, guildId: guildId, color: color, description: description, userId: user.id }) 
+            return embed
+        }  
     }
 }

@@ -47,12 +47,13 @@ app.use('/auth2/callback', (req, res, next) => __awaiter(void 0, void 0, void 0,
     const guilds = yield auth2_1.getGuilds(authToken.access_token);
     const users = yield auth2_1.getUser(authToken.access_token);
     const isUser = yield user_1.default.findOne({ id: users.id });
-    console.log(users);
+    ;
     if (isUser) {
         isUser.avatar = users.avatar;
         isUser.username = users.username;
         isUser.discrimintor = users.discriminator;
         isUser.save();
+        res.cookie('userid', isUser._id.toString());
     }
     else {
         const newUser = new user_1.default({
@@ -62,12 +63,12 @@ app.use('/auth2/callback', (req, res, next) => __awaiter(void 0, void 0, void 0,
             guilds: guilds
         });
         newUser.save();
+        res.cookie('userid', users._id.toString());
     }
     res.cookie('token', {
         access_token: authToken.access_token,
         refresh_token: authToken.refresh_token
     });
-    res.cookie('userid', users.id);
     return res.redirect('http://localhost:8080/login');
 }));
 app.use('/graphql', express_graphql_1.graphqlHTTP({
