@@ -26,9 +26,31 @@ const schema = graphql_1.buildSchema(`
         description: String 
         userId: String
     }
+    input imageInput { 
+        guildId: String!
+        channelId: String!
+        color: String!
+        description: String! 
+        userId: String!
+        footer: String
+        footerImage: String 
+        thumbnail: String
+        image: String!
+        author: String
+        authorImage: String
+        title: String
+    }
+    type vote { 
+        avatar: String
+        id: String
+        username: String 
+        discriminator: String
+    }
     type rootQuery { 
         getUser(id: String): User!
-        sendEmbed(userData: userInput): [String]
+        sendEmbed(userData: userInput): [String]!
+        imageEmbed(imageData: imageInput): [String]!
+        votes: [vote]
     }
     schema {   
         query: rootQuery
