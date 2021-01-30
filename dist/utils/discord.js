@@ -59,6 +59,9 @@ let sendEmbed = (content) => {
                         let embed = new discord_js_1.default.MessageEmbed();
                         embed.setColor(content.color);
                         embed.setDescription(content.description);
+                        if (content.title) {
+                            embed.setTitle(content.title);
+                        }
                         channel.send(embed);
                         resolve(['Ok']);
                     }

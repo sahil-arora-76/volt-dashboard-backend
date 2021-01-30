@@ -39,6 +39,11 @@ app.use((req, res, next) => {
 app.get('/auth2', (req, res, next) => {
     res.redirect(refs_1.default.redirect);
 });
+app.get('/logout', (req, res, next) => {
+    res.cookie('token', '__', { maxAge: 0 });
+    res.cookie('userid', '__', { maxAge: 0 });
+    res.redirect('http://localhost:8080/');
+});
 app.use('/auth2/callback', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const authToken = yield auth2_1.token(req.query.code);
     if (authToken.error) {
@@ -63,7 +68,7 @@ app.use('/auth2/callback', (req, res, next) => __awaiter(void 0, void 0, void 0,
             guilds: guilds
         });
         newUser.save();
-        res.cookie('userid', users._id.toString());
+        res.cookie('userid', newUser._id.toString());
     }
     res.cookie('token', {
         access_token: authToken.access_token,

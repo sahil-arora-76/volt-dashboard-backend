@@ -46,7 +46,7 @@ exports.default = {
             let c = mongoose_1.default.Types.ObjectId(args.userData.userId);
             let user = yield user_1.default.findOne({ _id: c });
             if (user) {
-                let embed = yield discord_1.sendEmbed({ channelId: channelId, guildId: guildId, color: color, description: description, userId: user.id });
+                let embed = yield discord_1.sendEmbed({ channelId: channelId, guildId: guildId, color: color, description: description, userId: user.id, title: args.userData.title });
                 return embed;
             }
         });
@@ -87,5 +87,5 @@ exports.default = {
             let res = yield discord_1.imageEmbed(content);
             return res;
         });
-    }
+    },
 };

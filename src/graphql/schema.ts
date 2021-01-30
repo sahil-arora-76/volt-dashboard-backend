@@ -23,6 +23,7 @@ const schema = buildSchema(`
         color: String 
         description: String 
         userId: String
+        title: String
     }
     input imageInput { 
         guildId: String!

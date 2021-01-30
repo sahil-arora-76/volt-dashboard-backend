@@ -1,12 +1,11 @@
 import express, { Request, Response, NextFunction, Application } from 'express';   
-import graphqlExpress, { graphqlHTTP }  from 'express-graphql'; 
+import { graphqlHTTP }  from 'express-graphql'; 
 import schema from './graphql/schema'; 
 import refs from './utils/refs';
 import resolver from './graphql/resolver'; 
 import mongoose from 'mongoose';
 import User from './models/user'; 
 import { getUser, getGuilds, token } from './utils/auth2';
-import user from './models/user';
 import bodyParser from 'body-parser'; 
 mongoose.connect('mongodb://localhost/dashboardv2'); 
 mongoose.connection.on('connected', () => {
@@ -26,6 +25,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 })
 app.get('/auth2', (req: Request, res: Response, next: NextFunction) => {
     res.redirect(refs.redirect); 
+})
+app.get('/logout', (req: Request, res: Response, next: NextFunction) => {
+    res.cookie('token','__', { maxAge: 0 }); 
+    res.cookie('userid', '__', { maxAge: 0 }); 
+    res.redirect('http://localhost:8080/');
 })
 app.use('/auth2/callback', async (req: Request, res: Response, next: NextFunction) => {
     const authToken = await token(req.query.code as string); 
@@ -49,7 +53,7 @@ app.use('/auth2/callback', async (req: Request, res: Response, next: NextFunctio
             guilds: guilds
         })
         newUser.save(); 
-        res.cookie('userid', users._id.toString());
+        res.cookie('userid', newUser._id.toString());
     }
     res.cookie('token', { 
         access_token: authToken.access_token, 

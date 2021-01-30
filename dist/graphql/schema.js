@@ -25,6 +25,7 @@ const schema = graphql_1.buildSchema(`
         color: String 
         description: String 
         userId: String
+        title: String
     }
     input imageInput { 
         guildId: String!

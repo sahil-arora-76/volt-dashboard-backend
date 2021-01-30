@@ -30,7 +30,7 @@ export default {
         let c  = mongoose.Types.ObjectId(args.userData.userId);
         let user = await User.findOne({ _id:  c }); 
         if (user) { 
-            let embed = await embeds({channelId: channelId, guildId: guildId, color: color, description: description, userId: user.id }) 
+            let embed = await embeds({ channelId: channelId, guildId: guildId, color: color, description: description, userId: user.id, title: args.userData.title }) 
             return embed
         }  
     },
@@ -68,5 +68,5 @@ export default {
         }
         let res = await embedimage(content); 
         return res;
-    }
+    },
 }
