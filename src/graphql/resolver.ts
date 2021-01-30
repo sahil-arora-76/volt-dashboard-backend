@@ -1,5 +1,4 @@
 import User from '../models/user'; 
-
 import mongoose from 'mongoose';
 import { guilds, sendEmbed as embeds, imageEmbed as embedimage  } from '../utils/discord';
 
@@ -48,7 +47,7 @@ export default {
         let authorImage = args.imageData.authorImage; 
         let title = args.imageData.title; 
         let c  = mongoose.Types.ObjectId(userMongooseId);
-        const user = await User.findOne({_id: c}); 
+        const user = await User.findOne({ _id: c }); 
         if (!user){ 
             return ['No User Found Try Logging In Again']
         }
@@ -68,5 +67,5 @@ export default {
         }
         let res = await embedimage(content); 
         return res;
-    },
+    }
 }

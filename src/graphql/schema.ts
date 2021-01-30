@@ -51,6 +51,9 @@ const schema = buildSchema(`
         imageEmbed(imageData: imageInput): [String]!
         votes: [vote]
     }
+    type userInput { 
+        id: String!
+    }
     schema {   
         query: rootQuery
     }

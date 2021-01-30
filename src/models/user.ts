@@ -8,5 +8,6 @@ const user = new mongoose.Schema({
     avatar: String, 
     discriminator: String, 
     guilds: Array, 
+    api: Boolean
 }, { timestamps: true })
 export default mongoose.model('Users', user); 
