@@ -73,7 +73,12 @@ module.exports =  {
         let c = await getVotes(); 
         let k = []; 
         for (const el in c) { 
-            k.push(c[el]);
+            let cc = { 
+
+            }
+            cc = c[el];
+            cc.username = el;
+            k.push(cc);
         }
         return k;
     }
