@@ -25,12 +25,13 @@ let guilds = (guilds, userid) => {
                 reject([]);
             }
         })
-    client.login(refs.token);
-})
-return promise;
+        client.login(refs.token);
+    })
+    return promise;
 } 
 
 let sendEmbed = (content)  => {
+    // eslint-disable-next-line no-unused-vars
     const promise = new Promise((resolve, reject) => {
         const client = new discord.Client();
         const errors = []; 
@@ -78,6 +79,7 @@ let sendEmbed = (content)  => {
 
 let imageEmbed  = (content ) => {
     const client = new discord.Client();  
+    // eslint-disable-next-line no-unused-vars
     const promise = new Promise((resolve, reject) => {
         const errors = [];
         client.on('ready', () => {
