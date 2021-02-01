@@ -71,8 +71,11 @@ module.exports =  {
     },
     async getVote() {
         let c = await getVotes(); 
-        console.log(c);
-        return c;
+        let k = []; 
+        for (const el in c) { 
+            k.push(c[el]);
+        }
+        return k;
     }
 
 };
