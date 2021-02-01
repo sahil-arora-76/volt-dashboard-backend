@@ -17,7 +17,7 @@ module.exports =  {
                 avatar: user.avatar, 
                 guilds: sortedGuilds, 
                 discriminator: user.discriminator, 
-                icon: user.icon ? user.icon : 'thor'
+                icon: user.icon ? user.icon : ''
             }
         } 
     }, 
