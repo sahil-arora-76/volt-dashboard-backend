@@ -3,19 +3,25 @@ const refs = require('./refs')
 const baseUrl = 'https://top.gg/api';
 const bot_id = '710534645405581353';
 
-const getLastVotes = () => {
+const getLastVotes = async () => {
     const promise = new Promise((resolve, reject) => {
-        // eslint-disable-next-line
-        const res = await fetch(`${baseUrl}/bots/${bot_id}/votes`, { 
-            method: 'GET',
-            headers: {
-                'Authorization': refs.topgg
-            }
-        });
+        try {
+            // eslint-disable-next-line
+            let res = await fetch(`${baseUrl}/bots/${bot_id}/votes`, { 
+                method: 'GET',
+                headers: {
+                    'Authorization': refs.topgg
+                }
+            });
+            res = await res.json();
+            resolve(res);
+        } catch (error) {
+            reject(error);
+        };
     });
-    return res;
-}
+    return promise;
+};
 
 module.exports = {
     getLastVotes
-}
+};
