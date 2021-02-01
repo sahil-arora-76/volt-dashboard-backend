@@ -28,13 +28,13 @@ app.get('/auth2', (req, res, next) => {
     res.redirect(refs.redirect); 
 })
 
-app.get('/logout', (req, res, next) => {
+app.get('/logout', (req, res) => {
     res.cookie('token','__', { maxAge: 0 }); 
     res.cookie('userid', '__', { maxAge: 0 }); 
     res.redirect('http://localhost:8080/');
 })
 
-app.use('/auth2/callback', async (req, res, next) => {
+app.use('/auth2/callback', async (req, res) => {
     const authToken = await token(req.query.code); 
     if (authToken.error) { 
         return res.redirect('http://localhost:8080');
