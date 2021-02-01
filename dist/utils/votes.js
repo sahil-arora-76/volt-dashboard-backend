@@ -1,12 +1,11 @@
 const fetch = require('node-fetch');
-const refs = require('./refs')
+const refs = require('./refs');
 const baseUrl = 'https://top.gg/api';
 const bot_id = '710534645405581353';
 
-const getLastVotes = async () => {
-    const promise = new Promise((resolve, reject) => {
+const getLastVotes = () => {
+    const promise = new Promise(async (resolve, reject) => {
         try {
-            // eslint-disable-next-line
             let res = await fetch(`${baseUrl}/bots/${bot_id}/votes`, { 
                 method: 'GET',
                 headers: {
@@ -17,7 +16,7 @@ const getLastVotes = async () => {
             resolve(res);
         } catch (error) {
             reject(error);
-        };
+        }
     });
     return promise;
 };
