@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const graphql_1 = require("graphql");
-const schema = graphql_1.buildSchema(`
+const { buildSchema } = require('graphql');
+const schema = buildSchema(`
     type guild { 
         id: String!
         owner: Boolean
@@ -41,20 +39,13 @@ const schema = graphql_1.buildSchema(`
         authorImage: String
         title: String
     }
-    type vote { 
-        avatar: String
-        id: String
-        username: String 
-        discriminator: String
-    }
     type rootQuery { 
         getUser(id: String): User!
         sendEmbed(userData: userInput): [String]!
         imageEmbed(imageData: imageInput): [String]!
-        votes: [vote]
     }
     schema {   
         query: rootQuery
     }
-`);
-exports.default = schema;
+`)
+module.exports =  schema; 
