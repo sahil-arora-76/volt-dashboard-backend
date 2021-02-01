@@ -9,6 +9,6 @@ const user = new mongoose.Schema({
     discriminator: String, 
     guilds: Array, 
     api: Boolean
-}, { timestamps: true })
+}, { timestamps: true });
 
 module.exports = mongoose.model('Users', user);

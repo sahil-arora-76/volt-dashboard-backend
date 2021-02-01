@@ -47,5 +47,5 @@ const schema = buildSchema(`
     schema {   
         query: rootQuery
     }
-`)
+`);
 module.exports =  schema; 

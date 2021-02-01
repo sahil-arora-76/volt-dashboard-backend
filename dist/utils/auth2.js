@@ -16,10 +16,10 @@ const token = async (code) => {
             'Content-Type': 'application/x-www-form-urlencoded'
         }, 
         body: data
-    })
+    });
     const response = await res.json(); 
     return response; 
-}
+};
 
 const getGuilds = async (accessCode) => { 
     const res = await fetch(baseUrl + '/users/@me/guilds', {
@@ -27,10 +27,10 @@ const getGuilds = async (accessCode) => {
             'Authorization': 'Bearer ' + accessCode, 
             'Content-Type': 'application/json'
         }
-    })
+    });
     const response = await res.json();
     return response; 
-}
+};
 
 
 const getUser  = async (accessCode) => { 
@@ -39,13 +39,13 @@ const getUser  = async (accessCode) => {
             'Authorization': 'Bearer ' + accessCode, 
             'Content-Type': 'applicaton/json'
         }
-    })
+    });
     const response = await res.json(); 
     return response;
-}
+};
 
 module.exports = { 
     token: token, 
     getGuilds: getGuilds, 
     getUser: getUser
-}
+};

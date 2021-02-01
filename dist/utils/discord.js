@@ -17,18 +17,18 @@ let guilds = (guilds, userid) => {
                         }
                     }
                 }  
-            })
+            });
             if (sortedGuilds.length > 0 ) {
                 client.destroy(); 
                 resolve(sortedGuilds);
             } else { 
                 reject([]);
             }
-        })
+        });
         client.login(refs.token);
-    })
+    });
     return promise;
-} 
+}; 
 
 let sendEmbed = (content)  => {
     // eslint-disable-next-line no-unused-vars
@@ -52,7 +52,7 @@ let sendEmbed = (content)  => {
                         resolve(['Ok']); 
                     } else { 
                         errors.push('Not Enough Perms');
-                        resolve(errors)
+                        resolve(errors);
                     }
                 } else { 
                     errors.push('You Should Be In That Guild'); 
@@ -70,11 +70,11 @@ let sendEmbed = (content)  => {
                     resolve(errors);
                 }
             }
-        })
+        });
         client.login(refs.token); 
-    })
+    });
     return promise;
-}
+};
 
 
 let imageEmbed  = (content ) => {
@@ -94,7 +94,7 @@ let imageEmbed  = (content ) => {
                         embed.setDescription(content.description);
                         if (content.footer) {  
                             if (content.footerImage) { 
-                                embed.setFooter(content.footer, content.footerImage)
+                                embed.setFooter(content.footer, content.footerImage);
                             } else {
                                 embed.setFooter(content.footer);
                             }
@@ -112,12 +112,12 @@ let imageEmbed  = (content ) => {
                         if (content.image) { 
                             embed.setImage(content.image); 
                         }
-                        console.log(embed)
+                        console.log(embed);
                         channel.send(embed);
                         resolve(['Ok']);
                     } else {
                         errors.push('Required MANAGE_GUILD Perms '); 
-                        resolve(errors)
+                        resolve(errors);
                     }
                 } else { 
                     errors.push('You Should Be In That Guild'); 
@@ -136,15 +136,15 @@ let imageEmbed  = (content ) => {
                 }
             }
               
-        })
-    })
+        });
+    });
     client.login(refs.token); 
     return promise;
-}
+};
 
 
 module.exports =  {
     guilds: guilds, 
     sendEmbed: sendEmbed, 
     imageEmbed: imageEmbed
-}
+};

@@ -7,7 +7,7 @@ module.exports =  {
         let id = args.id; 
         let user = await User.findOne({ _id: id });
         if (!user) { 
-            return ['No User Found Try Logging In Again']
+            return ['No User Found Try Logging In Again'];
         } else { 
             let sortedGuilds = await refs.guilds(user.guilds, user.id);
             return { 
@@ -18,7 +18,7 @@ module.exports =  {
                 guilds: sortedGuilds, 
                 discriminator: user.discriminator, 
                 icon: user.icon ? user.icon : ''
-            }
+            };
         } 
     }, 
     async sendEmbed(args) { 
@@ -29,8 +29,8 @@ module.exports =  {
         let c  = mongoose.Types.ObjectId(args.userData.userId);
         let user = await User.findOne({ _id:  c }); 
         if (user) { 
-            let embed = await refs.sendEmbed({ channelId: channelId, guildId: guildId, color: color, description: description, userId: user.id, title: args.userData.title }) 
-            return embed
+            let embed = await refs.sendEmbed({ channelId: channelId, guildId: guildId, color: color, description: description, userId: user.id, title: args.userData.title }); 
+            return embed;
         }  
     },
     async imageEmbed(args) { 
@@ -49,7 +49,7 @@ module.exports =  {
         let c  = mongoose.Types.ObjectId(userMongooseId);
         const user = await User.findOne({ _id: c }); 
         if (!user){ 
-            return ['No User Found Try Logging In Again']
+            return ['No User Found Try Logging In Again'];
         }
         let content = { 
             channelId: channelId, 
@@ -64,8 +64,8 @@ module.exports =  {
             footer: footer && footer.length > 0 ?  footer : undefined, 
             authorImage: authorImage && authorImage.length > 0 ? authorImage : undefined, 
             title: title && title.length > 0 ? title : undefined
-        }
+        };
         let res = await refs.imageEmbed(content); 
         return res;
     }
-}
+};
