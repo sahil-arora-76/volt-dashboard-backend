@@ -40,10 +40,11 @@ const schema = buildSchema(`
         title: String
     }
     type vote {
-        id: String!
-        username: String!
-        discriminator: String!
+        id: String
+        username: String
+        discriminator: String
         avatar: String
+        votes: Int
     }
     type rootQuery { 
         getUser(id: String): User!
