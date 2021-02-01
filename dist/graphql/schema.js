@@ -39,10 +39,17 @@ const schema = buildSchema(`
         authorImage: String
         title: String
     }
+    type vote {
+        id: String!
+        username: String!
+        discriminator: String!
+        avatar: String
+    }
     type rootQuery { 
         getUser(id: String): User!
         sendEmbed(userData: userInput): [String]!
         imageEmbed(imageData: imageInput): [String]!
+        getVote: [vote]! 
     }
     schema {   
         query: rootQuery

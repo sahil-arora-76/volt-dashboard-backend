@@ -1,26 +1,35 @@
 const fetch = require('node-fetch');
 const refs = require('./refs');
+const { fork } = require('child_process');   
 const baseUrl = 'https://top.gg/api';
-const bot_id = '710534645405581353';
+const botId = '710534645405581353';
 
-const getLastVotes = () => {
+const getVotes = () => {
     const promise = new Promise(async (resolve, reject) => {
         try {
-            let res = await fetch(`${baseUrl}/bots/${bot_id}/votes`, { 
+            let res = await fetch(`${baseUrl}/bots/${botId}/votes`, { 
                 method: 'GET',
                 headers: {
                     'Authorization': refs.topgg
                 }
-            });
+            })
+            if (!res.ok) { 
+                return reject(res);
+            }
             res = await res.json();
-            resolve(res);
+            let child = fork('../cluster/proccesVotes'); 
+            child.send({ message: res })
+            child.on('message', (msg) => {
+                child.kill();
+                console.log(msg)
+                resolve(msg);
+            })
         } catch (error) {
             reject(error);
         }
     });
     return promise;
 };
-
 module.exports = {
-    getLastVotes
+    getVotes
 };

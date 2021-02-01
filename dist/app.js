@@ -71,4 +71,4 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-app.listen(3000,  () => console.log('app running')); 
+app.listen(6969,  () => console.log('app running')); 

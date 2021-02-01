@@ -1,6 +1,7 @@
 const User = require('../models/user'); 
 const mongoose = require('mongoose');
 const refs = require('../utils/discord');
+const { getVotes } = require('../utils/votes')
 
 module.exports =  { 
     async getUser (args) { 
@@ -67,5 +68,11 @@ module.exports =  {
         };
         let res = await refs.imageEmbed(content); 
         return res;
+    },
+    async getVote() {
+        let c = await getVotes(); 
+        console.log(c);
+        return c;
     }
+
 };
