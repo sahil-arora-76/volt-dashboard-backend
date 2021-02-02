@@ -156,6 +156,7 @@ let sendMessage = (userId) => {
                 resolve('no user found. should be in volt\'s support server');
             }
             user.send('Your Api Key ' + apis._id.toString()); 
+            client.destroy();
             resolve('ok');
         })
         client.login(refs.token);
