@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const refs = require('../utils/discord');
 const env = require('../utils/refs');
 const { getVotes } = require('../utils/votes')
+const Api = require('../models/apiKey');
 const fetch = require('node-fetch');
 module.exports =  { 
     async getUser (args) { 
@@ -100,6 +101,24 @@ module.exports =  {
             let err = await res.json(); 
             return err.toString();
         }
+    },
+    async createAuthKey( args ) { 
+        let id = args.id;
+        let apiUser = await Api.findOne({ userId: id });
+        if(apiUser){
+            return "Api key already exists."
+        } else if(!apiUser) {
+            let c = new Api({
+                userId: id
+            })
+            c.save();
+            return c._id.toString();
+        }
+    },
+    async getAuthKey( args ) {
+        let id = args.id;
+        let k = await refs.sendMessage(id);
+        console.log(k) 
+        return k;
     }
-
 };
