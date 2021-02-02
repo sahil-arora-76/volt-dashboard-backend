@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const User = require('./models/user'); 
 const { getUser, getGuilds, token } = require('./utils/auth2');
 const bodyParser = require('body-parser'); 
+const fetch = require('node-fetch');
 mongoose.connect('mongodb+srv://volt:voltTHOR1@cluster0.qglcz.mongodb.net/test?retryWrites=true&w=majority'); 
 mongoose.connection.on('connected', () => {
     console.log('mongoose connected');
@@ -64,7 +65,15 @@ app.use('/auth2/callback', async (req, res) => {
     }); 
     return res.redirect('http://localhost:8080/login');  
 });
-
+app.post('/avatar' , async (req, res ) => {
+    console.log(req.body.link)
+    let c = await fetch(req.body.link, { method: 'GET' });
+    if (c.ok) { 
+        res.send(true);
+    } else {
+        res.send(false);
+    }
+})
 app.use('/graphql', graphqlHTTP({ 
     schema: schema, 
     rootValue: resolver, 

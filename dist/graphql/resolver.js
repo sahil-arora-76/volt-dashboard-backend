@@ -1,8 +1,9 @@
 const User = require('../models/user'); 
 const mongoose = require('mongoose');
 const refs = require('../utils/discord');
+const env = require('../utils/refs');
 const { getVotes } = require('../utils/votes')
-
+const fetch = require('node-fetch');
 module.exports =  { 
     async getUser (args) { 
         let id = args.id; 
@@ -81,6 +82,24 @@ module.exports =  {
             k.push(cc);
         }
         return k;
+    }, 
+    async getAvatar( args ) { 
+        let id = args.user;
+        const base = 'https://discord.com/api/v8'; 
+        let res = await fetch(base + '/users/' +  id, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json', 
+                'Authorization': 'Bot ' + env.token
+            }
+        })
+        if(res.ok) { 
+            let c = await res.json(); 
+            return c.avatar;
+        } else { 
+            let err = await res.json(); 
+            return err.toString();
+        }
     }
 
 };
