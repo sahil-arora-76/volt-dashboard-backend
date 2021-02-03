@@ -1,13 +1,13 @@
-const mongoose = require('mongoose'); 
-const user = new mongoose.Schema({ 
-    username: String, 
+const mongoose = require('mongoose');
+const user = new mongoose.Schema({
+    username: String,
     id: {
-        type: String, 
+        type: String,
         required: true
-    }, 
-    avatar: String, 
-    discriminator: String, 
-    guilds: Array, 
+    },
+    avatar: String,
+    discriminator: String,
+    guilds: Array,
     api: Boolean
 }, { timestamps: true });
 

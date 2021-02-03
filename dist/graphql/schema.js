@@ -52,9 +52,11 @@ const schema = buildSchema(`
         imageEmbed(imageData: imageInput): [String]!
         getVote: [vote]! 
         getAvatar(user: String!): String!
+        createAuthKey(id: String!): String!
+        getAuthKey(id: String): String
     }
     schema {   
         query: rootQuery
     }
 `);
-module.exports =  schema; 
+module.exports =  schema;
