@@ -11,6 +11,15 @@
         "quotes": ["error", "single"],
         "no-empty": "error",
         "no-extra-parens": "error",
-        "no-extra-semi": "error"
+        "no-extra-semi": "error",
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+        "no-var": "error",
+        "arrow-spacing": "error",
+        "no-trailing-spaces": "error",
+        "camelcase": "warn",
+        "sort-vars": "warn",
+        "sort-imports": "warn",
+        "semi-spacing": "warn",
+        "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false}]
     }
 }
