@@ -125,7 +125,8 @@ module.exports =  {
     }, 
     async validateUser( args ) { 
         let id = args.id; 
-        let user = await User.findOne({ id :id }); 
+        let mongooseId = mongoose.Types.ObjectId(id);
+        let user = await User.findOne({ _id: mongooseId }); 
         if (!user) { 
             return false;
         }
