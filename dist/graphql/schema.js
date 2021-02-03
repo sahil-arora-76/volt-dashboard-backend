@@ -59,4 +59,4 @@ const schema = buildSchema(`
         query: rootQuery
     }
 `);
-module.exports =  schema; 
+module.exports =  schema;
