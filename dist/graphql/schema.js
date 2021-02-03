@@ -53,7 +53,8 @@ const schema = buildSchema(`
         getVote: [vote]! 
         getAvatar(user: String!): String!
         createAuthKey(id: String!): String!
-        getAuthKey(id: String): String
+        getAuthKey(id: String): String!
+        validateUser(id: String): Boolean!
     }
     schema {   
         query: rootQuery

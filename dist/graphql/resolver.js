@@ -122,5 +122,13 @@ module.exports =  {
             return 'You Are Not Having Any Api Key';
         }
         return k._id.toString(); 
+    }, 
+    async validateUser( args ) { 
+        let id = args.id; 
+        let user = await User.findOne({ id :id }); 
+        if (!user) { 
+            return false;
+        }
+        return true; 
     }
 };
