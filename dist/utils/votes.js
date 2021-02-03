@@ -1,6 +1,5 @@
 const fetch = require('node-fetch');
 const refs = require('./refs');
-const heavylift = require   
 const baseUrl = 'https://top.gg/api';
 const botId = '710534645405581353';
 
@@ -15,7 +14,7 @@ function heavyLifiting(args) {
                 avatar: args[i].avatar, 
                 id: args[i].id, 
                 username: args[i].username 
-            }
+            };
             c[args[i].username] = obj;
         }
     }
@@ -30,7 +29,7 @@ const getVotes = () => {
                 headers: {
                     'Authorization': refs.topgg
                 }
-            })
+            });
             if (!res.ok) { 
                 return reject(res);
             }

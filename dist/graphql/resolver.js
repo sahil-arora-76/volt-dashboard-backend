@@ -2,7 +2,7 @@ const User = require('../models/user');
 const mongoose = require('mongoose');
 const refs = require('../utils/discord');
 const env = require('../utils/refs');
-const { getVotes } = require('../utils/votes')
+const { getVotes } = require('../utils/votes');
 const fetch = require('node-fetch');
 module.exports =  { 
     async getUser (args) { 
@@ -76,7 +76,7 @@ module.exports =  {
         for (const el in c) { 
             let cc = { 
 
-            }
+            };
             cc = c[el];
             cc.username = el;
             k.push(cc);
@@ -92,7 +92,7 @@ module.exports =  {
                 'Content-Type': 'application/json', 
                 'Authorization': 'Bot ' + env.token
             }
-        })
+        });
         if(res.ok) { 
             let c = await res.json(); 
             return c.avatar;

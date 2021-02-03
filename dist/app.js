@@ -51,9 +51,9 @@ app.use('/auth2/callback', async (req, res) => {
         res.cookie('userid', isUser._id.toString()); 
     } else { 
         const newUser = new User({
-            id: users.id, 
-            avatar: users.avatar, 
-            discriminator: users.discriminator, 
+            id: users.id,
+            avatar: users.avatar,
+            discriminator: users.discriminator,
             guilds: guilds
         });
         newUser.save(); 
@@ -66,14 +66,14 @@ app.use('/auth2/callback', async (req, res) => {
     return res.redirect('http://localhost:8080/login');  
 });
 app.post('/avatar' , async (req, res ) => {
-    console.log(req.body.link)
+    console.log(req.body.link);
     let c = await fetch(req.body.link, { method: 'GET' });
     if (c.ok) { 
         res.send(true);
     } else {
         res.send(false);
     }
-})
+});
 app.use('/graphql', graphqlHTTP({ 
     schema: schema, 
     rootValue: resolver, 
