@@ -117,8 +117,10 @@ module.exports =  {
     },
     async getAuthKey( args ) {
         let id = args.id;
-        let k = await refs.sendMessage(id);
-        console.log(k) 
-        return k;
+        let k = await Api.findOne({ userId: id }); 
+        if (!k) { 
+            return 'You Are Not Having Any Api Key';
+        }
+        return k._id.toString(); 
     }
 };

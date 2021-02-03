@@ -31,7 +31,6 @@ let guilds = (guilds, userid) => {
 }; 
 
 let sendEmbed = (content)  => {
-    // eslint-disable-next-line no-unused-vars
     const promise = new Promise((resolve, reject) => {
         const client = new discord.Client();
         const errors = []; 
@@ -143,31 +142,10 @@ let imageEmbed  = (content ) => {
 };
 
 
-let sendMessage = (userId) => {
-    const promise = new Promise(async (resolve, reject) => {
-        const apis = await api.findOne({ userId: userId }); 
-        if(!apis ) { 
-            resolve('no user found!');
-        }
-        const client = new discord.Client(); 
-        client.on('ready', () => {
-            let user = client.users.cache.get(userId); 
-            if(!user) { 
-                resolve('no user found. should be in volt\'s support server');
-            }
-            user.send('Your Api Key ' + apis._id.toString()); 
-            client.destroy();
-            resolve('ok');
-        })
-        client.login(refs.token);
-    }) 
-    return promise;
-}
 
 
 module.exports =  {
     guilds: guilds, 
     sendEmbed: sendEmbed, 
     imageEmbed: imageEmbed, 
-    sendMessage: sendMessage
 };
